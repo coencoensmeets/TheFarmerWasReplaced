@@ -1,19 +1,23 @@
 from Planting import plant_tree, plant_carrot, plant_wheat, plant_pumpkin
 
+
 def tilt_field():
+	clear()
 	for n in range(get_world_size()):
 		for m in range(get_world_size()):
-			till()
+			if get_ground_type() != Grounds.Soil:
+				till()
 			move(East)
 		move(North)
 
 def intercropping():
+	tilt_field()
 	world_size = get_world_size()
 	while True:
 		for n in range(world_size):
 			if (get_pos_x() + get_pos_y()) % 2 == 0:
 				plant_tree()
-			elif get_pos_y() < 0:
+			elif get_pos_y() < world_size//2:
 				plant_carrot()
 			else:
 				plant_wheat()
@@ -41,7 +45,7 @@ def complete_field_simple(plant_func, N):
 		move(North)
 		
 def complete_field_pumpkin():
-	clear()
+	buy_pumpkin_seeds()
 	world_size = get_world_size()
 	pumpkin_count = 0
 	plant_mode = True
@@ -57,16 +61,17 @@ def complete_field_pumpkin():
 				plant_pumpkin()
 			elif not plant_mode:
 				harvest()
-				if (num_items(Items.Carrots)<world_size**2):
-					clear()
-					complete_field_simple(plant_carrot, 10)
-				trade(Items.Pumpkin_Seed, world_size**2*5)
+				buy_pumpkin_seeds()
 				pumpkin_count = 0
-			elif (num_items(Items.Carrots)<world_size**2):
-					clear()
-					complete_field_simple(plant_carrot, 10)
 			else:
 				pumpkin_count = 0
 
 			move(East)
 		move(North)
+
+def buy_pumpkin_seeds():
+	if (num_items(Items.Pumpkin_Seed)>get_world_size()**2*5):
+		return
+	if (num_items(Items.Carrot)<get_world_size()**2):
+		complete_field_simple(plant_carrot, 10)
+	trade(Items.Pumpkin_Seed, get_world_size()**2*5)

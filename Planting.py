@@ -6,8 +6,6 @@ def plant_tree():
 def plant_carrot():
 	if can_harvest() or get_entity_type() == None:
 		harvest()
-		if (get_ground_type() != Grounds.Soil):
-			till()
 		trade(Items.Carrot_Seed)
 		plant(Entities.Carrots)
 	elif get_entity_type() != Entities.Carrots:
@@ -19,6 +17,4 @@ def plant_wheat():
 	plant(Entities.Grass)
 
 def plant_pumpkin():
-		if (get_ground_type() != Grounds.Soil):
-			till()
 		plant(Entities.Pumpkin)

@@ -1,4 +1,4 @@
-from Cropping import intercropping, complete_field, complete_field_pumpkin
-
+from Cropping import intercropping, complete_field, tilt_field
 while True:
-    intercropping()
+    tilt_field()
+    complete_field(Entities.Pumpkin)
