@@ -10,6 +10,9 @@ def plant_carrot():
 			till()
 		trade(Items.Carrot_Seed)
 		plant(Entities.Carrots)
+	elif get_entity_type() != Entities.Carrots:
+		harvest()
+		plant(Entities.Carrots)
 
 def plant_wheat():
 	harvest()
