@@ -1,4 +1,4 @@
-from Planting import intercropping, plant_one_crop
+from Cropping import intercropping, complete_field, complete_field_pumpkin
 
 while True:
-	plant_one_crop(Entities.Carrot)
+    complete_field(Entities.Pumpkin)
