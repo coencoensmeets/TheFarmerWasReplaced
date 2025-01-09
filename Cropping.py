@@ -70,8 +70,10 @@ def complete_field_pumpkin():
 		move(North)
 
 def buy_pumpkin_seeds():
-	if (num_items(Items.Pumpkin_Seed)>get_world_size()**2*5):
+	if (num_items(Items.Pumpkin_Seed)>get_world_size()**2*2):
 		return
-	if (num_items(Items.Carrot)<get_world_size()**2):
-		complete_field_simple(plant_carrot, 10)
+	if (num_items(Items.Carrot)<get_world_size()**2*5):
+		tilt_field()
+		complete_field_simple(plant_carrot, get_world_size()*5)
+		tilt_field()
 	trade(Items.Pumpkin_Seed, get_world_size()**2*5)
