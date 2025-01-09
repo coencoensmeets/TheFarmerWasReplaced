@@ -1,13 +1,12 @@
 from Planting import plant_tree, plant_carrot, plant_wheat, plant_pumpkin
 
 def intercropping():
-	clear()
 	world_size = get_world_size()
 	while True:
 		for n in range(world_size):
 			if (get_pos_x() + get_pos_y()) % 2 == 0:
 				plant_tree()
-			elif get_pos_y() < 2:
+			elif get_pos_y() < 5:
 				plant_carrot()
 			else:
 				plant_wheat()
@@ -19,19 +18,22 @@ def complete_field(crop):
 		complete_field_pumpkin()
 		return
 	
-	clear()
+	if crop == Entities.Grass:
+		plant_func = plant_wheat
+	elif crop == Entities.Carrots:
+		plant_func = plant_carrot
+	
+	complete_field_simple(plant_func)
+
+def complete_field_simple(plant_func):
 	world_size = get_world_size()
 	while True:
 		for n in range(world_size):
-			if crop == Entities.Grass:
-				plant_wheat()
-			elif crop == Entities.Carrots:
-				plant_carrot()
+			plant_func()
 			move(East)
 		move(North)
 		
 def complete_field_pumpkin():
-	clear()
 	world_size = get_world_size()
 	pumpkin_count = 0
 	plant_mode = True
