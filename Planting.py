@@ -1,9 +1,15 @@
 def plant_tree():
+	"""
+	Plant a tree if possible otherwise harvest the field.
+	"""
 	if can_harvest() or get_entity_type() == None:
 		harvest()
 		plant(Entities.Tree)
 
 def plant_carrot():
+	"""
+	Plant carrots if possible otherwise harvest the field.
+	"""
 	if can_harvest() or get_entity_type() == None:
 		harvest()
 		trade(Items.Carrot_Seed)
@@ -13,8 +19,15 @@ def plant_carrot():
 		plant(Entities.Carrots)
 
 def plant_wheat():
-	harvest()
-	plant(Entities.Grass)
+	"""
+	Plant wheat if possible otherwise harvest the field.
+	"""
+	if can_harvest() or get_entity_type() == None:
+		harvest()
+		plant(Entities.Wheat)
 
 def plant_pumpkin():
-		plant(Entities.Pumpkin)
+	"""
+	Plant pumpkins.
+	"""
+	plant(Entities.Pumpkin)
