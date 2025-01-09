@@ -1,47 +1,33 @@
-def plant_bushes(N):	
-	clear()
-	world_size = get_world_size()
-	for i in range(N):
-		for n in range(world_size):
-			if can_harvest():
-				harvest()
-				plant(Entities.Bush)
-			move(East)
-		move(North)
+def plant_tree():
+	"""
+	Plant a tree if possible otherwise harvest the field.
+	"""
+	if can_harvest() or get_entity_type() == None:
+		harvest()
+		plant(Entities.Tree)
 
-def plant_carrots(N):
-	clear()
-	world_size = get_world_size()
-	for i in range(N):
-		for n in range(world_size):
-			if can_harvest():
-				harvest()
-				if get_ground_type() != Grounds.Soil:
-					till()
-				trade(Items.Carrot_Seed)
-				plant(Entities.Carrots)
-			move(East)
-		move(North)
+def plant_carrot():
+	"""
+	Plant carrots if possible otherwise harvest the field.
+	"""
+	if can_harvest() or get_entity_type() == None:
+		harvest()
+		trade(Items.Carrot_Seed)
+		plant(Entities.Carrots)
+	elif get_entity_type() != Entities.Carrots:
+		harvest()
+		plant(Entities.Carrots)
 
-def plant_wheat(N):
-	clear()
-	world_size = get_world_size()
-	for i in range(N):
-		for n in range(world_size):
-			if can_harvest():
-				harvest()
-				plant(Entities.Grass)
-			move(East)
-		move(North)
+def plant_wheat():
+	"""
+	Plant wheat if possible otherwise harvest the field.
+	"""
+	if can_harvest() or get_entity_type() == None:
+		harvest()
+		plant(Entities.Wheat)
 
-def crop_to_plant():
-	N_wheat = num_items(Items.Hay)
-	N_carrot = num_items(Items.Carrot)
-	N_bush = num_items(Items.Wood)
-
-	if N_wheat < N_carrot and N_wheat < N_bush:
-		return Entities.Grass
-	elif N_carrot < N_wheat and N_carrot < N_bush:
-		return Entities.Carrots
-	else:
-		return Entities.Bush
+def plant_pumpkin():
+	"""
+	Plant pumpkins.
+	"""
+	plant(Entities.Pumpkin)
