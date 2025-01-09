@@ -21,6 +21,4 @@ def plant_wheat():
 def plant_pumpkin():
 		if (get_ground_type() != Grounds.Soil):
 			till()
-		if (num_items(Items.Pumpkin_Seed) == 0):
-			trade(Items.Pumpkin_Seed)
 		plant(Entities.Pumpkin)
