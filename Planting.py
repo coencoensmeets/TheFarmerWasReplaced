@@ -12,20 +12,31 @@ def plant_carrot():
 		plant(Entities.Carrots)
 
 def plant_wheat():
-	if can_harvest() or get_entity_type() == None:
-		harvest()
-		plant(Entities.Grass)
+	harvest()
+	plant(Entities.Grass)
 
 def intercropping():
 	clear()
 	world_size = get_world_size()
 	while True:
 		for n in range(world_size):
-			if get_pos_x() % 2 == 0 and get_pos_y() % 2 == 0:
+			if (get_pos_x() + get_pos_y()) % 2 == 0:
 				plant_tree()
-			elif get_pos_y() < world_size // 2:
+			elif get_pos_y() < 1:
 				plant_carrot()
 			else:
 				plant_wheat()
+			move(East)
+		move(North)
+
+def plant_one_crop(crop):
+	clear()
+	world_size = get_world_size()
+	while True:
+		for n in range(world_size):
+			if crop == Entities.Grass:
+				plant_wheat()
+			elif crop == Entities.Carrots:
+				plant_carrot()
 			move(East)
 		move(North)
