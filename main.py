@@ -1,4 +1,6 @@
-from Cropping import intercropping, complete_field, tilt_field
+from Cropping import intercropping, complete_field
+from Field import tilt_field
+
 while True:
     tilt_field()
-    complete_field(Entities.Grass)
+    complete_field(Entities.Carrots)
