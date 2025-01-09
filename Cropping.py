@@ -9,7 +9,7 @@ def intercropping(N, plant_func):
 				if (get_pos_x() + get_pos_y()) % 2 == 0:
 					plant_tree()
 				else:
-					for k in range(len(plant_func)):
+					for k in range(len(plant_func), 0 -1):
 						if get_pos_y() < world_size//k:
 							plant_func[k]()
 							break
@@ -83,11 +83,14 @@ def complete_field_pumpkin():
 def buy_carrot_seeds(N):
 	if (num_items(Items.Carrot_Seed)>N):
 		return
+	if not (num_items(Items.Wood)<N*12+2 or num_items(Items.Hay)<N*12+1):
+		trade(Items.Carrot_Seed, N)
+		return
 	tilt_field()
 	print("N: ", N)
 	while (num_items(Items.Wood)<N*12+2 or num_items(Items.Hay)<N*12+1):
 		print('Intercropping!')
-		intercropping(20, [plant_wheat])
+		intercropping(20, [plant_wheat, plant_carrot])
 	trade(Items.Carrot_Seed, N)
 	tilt_field()
 
